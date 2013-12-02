@@ -16,74 +16,76 @@ using UnityEngine;
 // right away. (Right click your texture and choose reimport, if you added the xml file, or this
 // script after the png had already been processed.)
 
-public class TexturePackerImporter : AssetPostprocessor
+namespace ThirdPartyNinjas.UnityTools.Importers
 {
-	static void OnPostprocessAllAssets(string[] importedAssets,
-	                                   string[] deletedAssets,
-	                                   string[] movedAssets,
-	                                   string[] movedFromAssetPaths)
-	{
-		foreach(string assetPath in importedAssets)
+		public class TexturePackerImporter : AssetPostprocessor
 		{
-			// If the asset being imported in a png file, look for an xml with the same name next to it
-			if(Path.GetExtension(assetPath) == ".png")
-			{
-				string atlasPath = Path.ChangeExtension(assetPath, ".xml");
-
-				if(File.Exists(atlasPath))
+				static void OnPostprocessAllAssets (string[] importedAssets,
+		                                   string[] deletedAssets,
+		                                   string[] movedAssets,
+		                                   string[] movedFromAssetPaths)
 				{
-					TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(assetPath);
+						foreach (string assetPath in importedAssets) {
+								// If the asset being imported in a png file, look for an xml with the same name next to it
+								if (Path.GetExtension (assetPath) == ".png") {
+										string atlasPath = Path.ChangeExtension (assetPath, ".xml");
 
-					// if we're not in sprite mode, nothing to do here
-					if(importer.textureType != TextureImporterType.Sprite)
-						return;
+										if (File.Exists (atlasPath)) {
+												TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath (assetPath);
 
-					XDocument xmlDocument = XDocument.Load(atlasPath);
+												// if we're not in sprite mode, nothing to do here
+												if (importer.textureType != TextureImporterType.Sprite)
+														return;
 
-					// attempt to verify that we're really looking at a TexturePacker atlas
-					if(xmlDocument.Root.Name.LocalName != "TextureAtlas")
-						return;
+												XDocument xmlDocument = XDocument.Load (atlasPath);
 
-					int imageHeight = int.Parse(xmlDocument.Root.Attribute("height").Value, CultureInfo.InvariantCulture);
+												// attempt to verify that we're really looking at a TexturePacker atlas
+												if (xmlDocument.Root.Name.LocalName != "TextureAtlas")
+														return;
 
-					var sprites = xmlDocument.Descendants("sprite");
+												int imageHeight = int.Parse (xmlDocument.Root.Attribute ("height").Value, CultureInfo.InvariantCulture);
 
-					importer.spriteImportMode = SpriteImportMode.Multiple;
-					SpriteMetaData[] metaData = new SpriteMetaData[sprites.Count()];
+												var sprites = xmlDocument.Descendants ("sprite");
 
-					int currentSprite = 0;
+												importer.spriteImportMode = SpriteImportMode.Multiple;
+												SpriteMetaData[] metaData = new SpriteMetaData[sprites.Count ()];
 
-					foreach (var sprite in sprites)
-					{
-						string n = sprite.Attribute("n").Value;
-						int x = int.Parse(sprite.Attribute("x").Value, CultureInfo.InvariantCulture);
-						int y = int.Parse(sprite.Attribute("y").Value, CultureInfo.InvariantCulture);
-						int w = int.Parse(sprite.Attribute("w").Value, CultureInfo.InvariantCulture);
-						int h = int.Parse(sprite.Attribute("h").Value, CultureInfo.InvariantCulture);
-						int oX = (sprite.Attribute("oX") == null) ? 0 : int.Parse(sprite.Attribute("oX").Value, CultureInfo.InvariantCulture);
-						int oY = (sprite.Attribute("oY") == null) ? 0 : int.Parse(sprite.Attribute("oY").Value, CultureInfo.InvariantCulture);
-						int oW = (sprite.Attribute("oW") == null) ? w : int.Parse(sprite.Attribute("oW").Value, CultureInfo.InvariantCulture);
-						int oH = (sprite.Attribute("oH") == null) ? h : int.Parse(sprite.Attribute("oH").Value, CultureInfo.InvariantCulture);
-						bool r = sprite.Attribute("r") != null;
-						bool trim = (sprite.Attribute("oX") != null) ||
-							(sprite.Attribute("oY") != null) ||
-							(sprite.Attribute("oW") != null) ||
-							(sprite.Attribute("oH") != null);
+												int currentSprite = 0;
 
-						SpriteMetaData spriteMetaData = new SpriteMetaData();
-						spriteMetaData = new SpriteMetaData();
-						// According to Unity docs, Center = 0, Custom = 9
-						spriteMetaData.alignment = trim ? 9 : 0;
-						spriteMetaData.name = n;
-						spriteMetaData.pivot = new Vector2(((oW / 2.0f) - (oX)) / (float)w, 1.0f - ((oH / 2.0f) - (oY)) / (float)h);
-						spriteMetaData.rect = new Rect(x, imageHeight - y - h, w, h);
+												foreach (var sprite in sprites) {
+														string n = sprite.Attribute ("n").Value;
+														int x = int.Parse (sprite.Attribute ("x").Value, CultureInfo.InvariantCulture);
+														int y = int.Parse (sprite.Attribute ("y").Value, CultureInfo.InvariantCulture);
+														int w = int.Parse (sprite.Attribute ("w").Value, CultureInfo.InvariantCulture);
+														int h = int.Parse (sprite.Attribute ("h").Value, CultureInfo.InvariantCulture);
+														int oX = (sprite.Attribute ("oX") == null) ? 0 : int.Parse (sprite.Attribute ("oX").Value, CultureInfo.InvariantCulture);
+														int oY = (sprite.Attribute ("oY") == null) ? 0 : int.Parse (sprite.Attribute ("oY").Value, CultureInfo.InvariantCulture);
+														int oW = (sprite.Attribute ("oW") == null) ? w : int.Parse (sprite.Attribute ("oW").Value, CultureInfo.InvariantCulture);
+														int oH = (sprite.Attribute ("oH") == null) ? h : int.Parse (sprite.Attribute ("oH").Value, CultureInfo.InvariantCulture);
+														bool r = sprite.Attribute ("r") != null;
+														bool trim = (sprite.Attribute ("oX") != null) ||
+																(sprite.Attribute ("oY") != null) ||
+																(sprite.Attribute ("oW") != null) ||
+																(sprite.Attribute ("oH") != null);
 
-						metaData[currentSprite++] = spriteMetaData;
-					}
+														if (r)
+																Debug.LogWarning ("Rotated TexturePacker Sprites are not currently supported. File: " + assetPath + " Sprite: " + n);
 
-					importer.spritesheet = metaData;
+														SpriteMetaData spriteMetaData = new SpriteMetaData ();
+														spriteMetaData = new SpriteMetaData ();
+														// According to Unity docs, Center = 0, Custom = 9
+														spriteMetaData.alignment = trim ? 9 : 0;
+														spriteMetaData.name = n;
+														spriteMetaData.pivot = new Vector2 (((oW / 2.0f) - (oX)) / (float)w, 1.0f - ((oH / 2.0f) - (oY)) / (float)h);
+														spriteMetaData.rect = new Rect (x, imageHeight - y - h, w, h);
+
+														metaData [currentSprite++] = spriteMetaData;
+												}
+
+												importer.spritesheet = metaData;
+										}
+								}
+						}
 				}
-			}
 		}
-	}
 }
