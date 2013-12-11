@@ -36,7 +36,7 @@ namespace ThirdPartyNinjas.UnityTools
             for(int i=0; i<linePath.Points.Count; i++)
             {
                 Vector3 before = new Vector3(linePath.Points[i].x, linePath.Points[i].y);
-                Vector3 after = Handles.Slider2D(i + 1, before, linePath.transform.position, Vector3.up, Vector3.up, Vector3.left, 0.05f, Handles.DotCap, Vector2.one * 0.1f);
+                Vector3 after = Handles.Slider2D(i + 1, before, linePath.transform.position, Vector3.up, Vector3.up, Vector3.left, 1.0f, Handles.DotCap, Vector2.one * 0.1f);
                 if(before != after)
                 {
                     Undo.RecordObject(linePath, "Move Point");
