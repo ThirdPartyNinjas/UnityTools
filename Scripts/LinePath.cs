@@ -45,5 +45,21 @@ namespace ThirdPartyNinjas.UnityTools
         {
             return (x - p0.x) * ((p1.y - p0.y) / (p1.x - p0.x)) + p0.y;
         }
+
+        void OnEnable()
+        {
+            LinePathManager lpm = LinePathManager.Instance;
+
+            if(lpm != null)
+                lpm.Add(this);
+        }
+
+        void OnDisable()
+        {
+            LinePathManager lpm = LinePathManager.Instance;
+            
+            if(lpm != null)
+                lpm.Remove(this);
+        }
     }
 }
