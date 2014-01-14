@@ -81,6 +81,13 @@ namespace ThirdPartyNinjas.UnityTools
                     Undo.RecordObject(linePath, "Delete Point from Path");
                     linePath.Points.RemoveAt(remove);
                 }
+
+                bool tempAllowOffset = EditorGUILayout.Toggle("Allow Offset", linePath.AllowOffset);
+                if(linePath.AllowOffset != tempAllowOffset)
+                {
+                    Undo.RecordObject(linePath, "Change AllowOffset");
+                    linePath.AllowOffset = tempAllowOffset;
+                }
             }
             else
             {

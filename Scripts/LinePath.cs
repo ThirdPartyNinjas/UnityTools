@@ -6,10 +6,11 @@ namespace ThirdPartyNinjas.UnityTools
 {
     public class LinePath : MonoBehaviour
     {
+        public bool AllowOffset = true;
+
         public List<Vector2> Points = new List<Vector2>();
 
         public float MinimumX { get { return GetWorldPoint(0).x; } }
-
         public float MaximumX { get { return GetWorldPoint(Points.Count - 1).x; } }
 
         public Vector2 GetWorldPoint(int index)
@@ -27,6 +28,12 @@ namespace ThirdPartyNinjas.UnityTools
                 }
             }
             return (float)System.Math.Atan2(GetWorldPoint(Points.Count - 1).y - GetWorldPoint(Points.Count - 2).y, GetWorldPoint(Points.Count - 1).x - GetWorldPoint(Points.Count - 2).x);
+        }
+
+        public void OffsetPosition(Vector3 offset)
+        {
+            if(AllowOffset)
+                transform.position += offset;
         }
 
         public float InterpolateY(float x)

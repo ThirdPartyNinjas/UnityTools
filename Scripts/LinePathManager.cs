@@ -7,19 +7,25 @@ namespace ThirdPartyNinjas.UnityTools
 {
     public class LinePathManager : MonoBehaviour, IEnumerable<LinePath>
     {
-        public static LinePathManager Instance { get { return instance; } }
+        public static LinePathManager Instance
+        {
+            get
+            {
+                if(instance != null)
+                    return instance;
+                
+                if(preventCreation)
+                    return null;
+                
+                instance = new GameObject("LinePathManager").AddComponent<LinePathManager>();
+                GameObject.DontDestroyOnLoad(instance);
+                return instance;
+            }
+        }
 
         void Awake()
         {
-            instance = this;
             linePaths = new List<LinePath>();
-        }
-
-        void OnDestroy()
-        {
-            linePaths.Clear();
-            linePaths = null;
-            instance = null;
         }
 
         public void Add(LinePath linePath)
@@ -41,6 +47,13 @@ namespace ThirdPartyNinjas.UnityTools
         {
             return GetEnumerator();
         }
+
+        void OnApplicationQuit()
+        {
+            preventCreation = true;
+        }
+        
+        private static bool preventCreation = false;
 
         private static LinePathManager instance = null;
         private List<LinePath> linePaths;
