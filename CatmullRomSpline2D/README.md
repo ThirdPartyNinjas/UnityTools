@@ -37,13 +37,13 @@ These splines are designed to be used as paths for game objects to move along. T
 Next, you'll need to pass that data to the GetPosition method to receive a Vector2 of your position in world space.
 
 ```
-	Vector2 position = paths[currentPath].GetPosition(segment, s);
+	Vector2 position = path.GetPosition(segment, s);
 ```
 
 Finally, if you'd like to know the direction of the path at that position, you can pass the segment info to that GetDirection method.
 
 ```
-	var direction = paths[currentPath].GetDirection(segment, s);
+	var direction = path.GetDirection(segment, s);
 ```	
 
 And that's it! There's a simple example solution in the demos folder showing a spaceship moving along first an S-shaped path and then a Z-shaped path. See [FollowPath.cs](../Demos/CatmullRomSpline2D/FollowPath.cs) for a code example.
