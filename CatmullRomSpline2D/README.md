@@ -46,4 +46,4 @@ Finally, if you'd like to know the direction of the path at that position, you c
 	var direction = paths[currentPath].GetDirection(segment, s);
 ```	
 
-And that's it! There's a simple example solution in the demos folder showing a spaceship moving along first an S-shaped path and then a Z-shaped path. See (FollowPath.cs)[../Demos/CatmullRomSpline2D/FollowPath.cs] for a code example.
+And that's it! There's a simple example solution in the demos folder showing a spaceship moving along first an S-shaped path and then a Z-shaped path. See [FollowPath.cs](../Demos/CatmullRomSpline2D/FollowPath.cs) for a code example.
