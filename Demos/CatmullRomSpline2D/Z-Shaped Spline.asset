@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748295c5d2aff79439925c15b0646e78, type: 3}
+  m_Name: Z-Shaped Spline
+  m_EditorClassIdentifier: 
+  subsegmentSteps: 10
+  points:
+  - {x: -4.845313, y: 3.3267}
+  - {x: -4.5641522, y: 3.3267}
+  - {x: 4.320545, y: 3.2892118}
+  - {x: -4.3954554, y: -2.6901517}
+  - {x: 4.1143603, y: -2.6901517}
+  - {x: 4.5642185, y: -2.6714077}
