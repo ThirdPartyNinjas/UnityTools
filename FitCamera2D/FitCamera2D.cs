@@ -61,10 +61,6 @@ namespace ThirdPartyNinjas
 
         public void UpdateSize()
         {
-            // Note: This function can be called from external code (such as the FitCamera Inspector)
-            //  That's why the camera is tested here, despite being set in the coroutine above.
-            // Note: For some reason the null-coalescing operator (??) isn't working here.
-            //  attachedCamera appears as "null" (with quotes, is it a string?!) in the debugger.
             Camera camera = (attachedCamera != null) ? attachedCamera : GetComponent<Camera>();
 
             cameraWidth = camera.pixelWidth;
