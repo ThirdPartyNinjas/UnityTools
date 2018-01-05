@@ -10,8 +10,8 @@ namespace ThirdPartyNinjas
     {
         public int subsegmentSteps = 10;
         public List<Vector2> points = new List<Vector2>();
-
-        public float Length { get { return length; } }
+        public List<float> subsegmentDistances = new List<float>();
+        public float length = 0.0f;
 
         // Given the distance along the spline, return the current segment and the percentage through that segment
         public void GetSegment(float distance, out int segment, out float s)
@@ -22,7 +22,7 @@ namespace ThirdPartyNinjas
                 s = 0.0f;
                 return;
             }
-            else if (distance >= Length)
+            else if (distance >= length)
             {
                 segment = points.Count - 4;
                 s = 1.0f;
@@ -121,8 +121,5 @@ namespace ThirdPartyNinjas
             // dp/ds = 3a*s2 + 2b*s + c
             return 3.0f * a * s * s + 2.0f * b * s + c;
         }
-
-        private List<float> subsegmentDistances = new List<float>();
-        private float length = 0.0f;
     }
 }

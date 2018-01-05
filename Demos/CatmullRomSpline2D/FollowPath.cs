@@ -15,7 +15,7 @@ namespace ThirdPartyNinjas
             // move along the path until we reach the end, then start the next path
             float moveDistance = Time.deltaTime * speed;
             distanceAlongPath += moveDistance;
-            if (distanceAlongPath >= paths[currentPath].Length)
+            if (distanceAlongPath >= paths[currentPath].length)
             {
                 currentPath = (currentPath + 1) % paths.Count;
                 distanceAlongPath = 0.0f;

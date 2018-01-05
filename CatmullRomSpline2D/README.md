@@ -18,7 +18,7 @@ You can drag the control points around directly in the Scene window or edit them
 
 ![Editing a spline in scene view](../docs/SplineSceneWindow.jpg)
 
-There's one more field to talk about in the editor window, called Subsegment Steps. This field determines how many steps we break each path segment between control points into when approximating the length of a spline path. If we use more subsegments the measurements will be more accurate but requires more processing time while editing splines. (But not at runtime.) Increase this number if your game objects are moving at uneven speeds across different segments of the spline paths.
+There's one more field to talk about in the editor window, called Subsegment Steps. This field determines how many steps we break each path segment between control points into when approximating the length of a spline path. If we use more subsegments the measurements will be more accurate but requires more processing time while editing splines and memory at runtime. Increase this number if your game objects are moving at uneven speeds across different segments of the spline paths.
 
 Once you're done, you can drag a new spline object in and edit it, or close the editor window. The ScriptableObjects are serialized automatically, so there's nothing else you need to do.
 
