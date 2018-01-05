@@ -26,26 +26,26 @@ An implementation of the [Singleton pattern](https://en.wikipedia.org/wiki/Singl
 Derive your class from MonoBehaviourSingleton. If you don't want the object to persist on Unity scene changes (when it would otherwise be destroyed) override the PersistOnSceneChange property.
 
 ```
-	public class SingletonExample : MonoBehaviourSingleton<SingletonExample>
-	{
-		public override bool PersistOnSceneChange { get { return false; } }
-	}
+public class SingletonExample : MonoBehaviourSingleton<SingletonExample>
+{
+	public override bool PersistOnSceneChange { get { return false; } }
+}
 ```
 
 When you want to get an instance of the object or create one if it doesn't exist, use the Instance property.
 
 ```
-	var instance = SingletonExample.Instance;
+var instance = SingletonExample.Instance;
 ```
 
 If you want to try to grab an instance of the object, but not create one, use ExistingInstance instead. (A good reason to use this is to prevent accidentally creating a new instance during application shutdown.) Make sure to check for a null return.
 
 ```
-	var instance = SingletonExample.ExistingInstance;
-	if(instance != null)
-	{
-		// do something with it
-	}
+var instance = SingletonExample.ExistingInstance;
+if(instance != null)
+{
+	// do something with it
+}
 ```
 
 For a more concrete example usage, see [PrefabPool](../PrefabPool/README.md).

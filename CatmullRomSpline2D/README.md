@@ -29,21 +29,21 @@ Okay, we've created some splines, let's see how to use them.
 These splines are designed to be used as paths for game objects to move along. To find your position on the path, first you need to know what segment you are in by passing the distance along the path from the beginning. This will give you the current segment number and your position inside that segment.
 
 ```
-	int segment;
-	float s;
-	path.GetSegment(distanceAlongPath, out segment, out s);
+int segment;
+float s;
+path.GetSegment(distanceAlongPath, out segment, out s);
 ```
 
 Next, you'll need to pass that data to the GetPosition method to receive a Vector2 of your position in world space.
 
 ```
-	Vector2 position = path.GetPosition(segment, s);
+Vector2 position = path.GetPosition(segment, s);
 ```
 
 Finally, if you'd like to know the direction of the path at that position, you can pass the segment info to that GetDirection method.
 
 ```
-	var direction = path.GetDirection(segment, s);
+var direction = path.GetDirection(segment, s);
 ```	
 
 And that's it! There's a simple example solution in the demos folder showing a spaceship moving along first an S-shaped path and then a Z-shaped path. See [FollowPath.cs](../Demos/CatmullRomSpline2D/FollowPath.cs) for a code example.
