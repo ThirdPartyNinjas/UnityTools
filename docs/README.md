@@ -13,6 +13,7 @@ Some of the tools rely on some shared script files in the root of the repository
 * [CatmullRomSpline2D](../CatmullRomSpline2D/README.md) - A simple spline system and editor for creating curve paths.
 * [FitCamera2D](../FitCamera2D/README.md) - A self resizing orthographic camera to help with rendering at different aspect ratio.
 * [GameObjectAlignment](../GameObjectAlignment/README.md) - Editor tool for moving game objects around.
+* [PrefabPool](../PrefabPool/README.md) - Memory pooling for prefab objects.
 
 ## Common files
 
@@ -47,4 +48,4 @@ If you want to try to grab an instance of the object, but not create one, use Ex
 	}
 ```
 
-For a more concrete example usage, see the [PrefabPool tool](../PrefabPool/README.md)
+For a more concrete example usage, see [PrefabPool](../PrefabPool/README.md).
