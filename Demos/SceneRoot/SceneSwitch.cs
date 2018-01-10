@@ -19,7 +19,7 @@ namespace ThirdPartyNinjas
         {
             do
             {
-                StartCoroutine(SceneRoot.LoadSceneCoroutine(sceneList[sceneIndex], SceneLoadCallback));
+                yield return StartCoroutine(SceneRoot.LoadSceneCoroutine(sceneList[sceneIndex], SceneLoadCallback));
                 sceneIndex = (sceneIndex + 1) % sceneList.Count;
                 yield return new WaitForSeconds(delayTime);
             } while (true);

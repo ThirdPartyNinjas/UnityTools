@@ -20,6 +20,17 @@ namespace ThirdPartyNinjas
             {
                 Debug.LogError("SceneRoot needs a reference to a scene container GameObject");
             }
+
+#if UNITY_EDITOR
+            if(SceneManager.GetActiveScene() == gameObject.scene)
+            {
+                var isolatedChildren = sceneContainer.GetComponentsInChildren<IsolatedSceneEnable>(true);
+                foreach(var isolated in isolatedChildren)
+                {
+                    isolated.gameObject.SetActive(true);
+                }
+            }
+#endif
         }
 
         public void StartScene(bool setActiveScene = false)

@@ -14,6 +14,7 @@ Some of the tools rely on some shared script files in the root of the repository
 * [FitCamera2D](../FitCamera2D/README.md) - A self resizing orthographic camera to help with rendering at different aspect ratio.
 * [GameObjectAlignment](../GameObjectAlignment/README.md) - Editor tool for moving game objects around.
 * [PrefabPool](../PrefabPool/README.md) - Memory pooling for prefab objects.
+* [SceneRoot](../SceneRoot/README.md) - A container object used for asynchronous loading of Unity scenes.
 
 ## Common files
 
