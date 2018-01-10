@@ -10,12 +10,12 @@ namespace ThirdPartyNinjas
         public List<string> sceneList;
         public float delayTime = 5.0f;
 
-        void Start()
+        private void Start()
         {
             StartCoroutine(SwitchCoroutine());
         }
 
-        IEnumerator SwitchCoroutine()
+        private IEnumerator SwitchCoroutine()
         {
             do
             {
@@ -25,7 +25,7 @@ namespace ThirdPartyNinjas
             } while (true);
         }
 
-        void SceneLoadCallback(SceneRoot sceneRoot)
+        private void SceneLoadCallback(SceneRoot sceneRoot)
         {
             if (activeScene != null)
             {

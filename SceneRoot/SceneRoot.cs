@@ -22,10 +22,10 @@ namespace ThirdPartyNinjas
             }
 
 #if UNITY_EDITOR
-            if(SceneManager.GetActiveScene() == gameObject.scene)
+            if (SceneManager.GetActiveScene() == gameObject.scene)
             {
                 var isolatedChildren = sceneContainer.GetComponentsInChildren<IsolatedSceneEnable>(true);
-                foreach(var isolated in isolatedChildren)
+                foreach (var isolated in isolatedChildren)
                 {
                     isolated.gameObject.SetActive(true);
                 }
@@ -36,7 +36,7 @@ namespace ThirdPartyNinjas
         public void StartScene(bool setActiveScene = false)
         {
             sceneContainer.SetActive(true);
-            if(setActiveScene)
+            if (setActiveScene)
             {
                 SceneManager.SetActiveScene(gameObject.scene);
             }

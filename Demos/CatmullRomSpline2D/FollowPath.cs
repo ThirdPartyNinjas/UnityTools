@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace ThirdPartyNinjas
@@ -10,7 +9,7 @@ namespace ThirdPartyNinjas
         public float speed;
         public bool turnToPath;
 
-        void Update()
+        private void Update()
         {
             // move along the path until we reach the end, then start the next path
             float moveDistance = Time.deltaTime * speed;

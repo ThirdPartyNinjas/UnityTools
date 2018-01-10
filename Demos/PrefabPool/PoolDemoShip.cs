@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ThirdPartyNinjas
 {
     public class PoolDemoShip : PrefabMonoBehaviour
     {
-        Vector3 speed = Vector3.zero;
+        private Vector3 speed = Vector3.zero;
 
         public void Reset()
         {
@@ -16,11 +14,11 @@ namespace ThirdPartyNinjas
             speed.z = 0.0f;
         }
 
-        void Update()
+        private void Update()
         {
             transform.position += speed * Time.deltaTime;
 
-            if(Mathf.Abs(transform.position.x) > 10.0f || Mathf.Abs(transform.position.y) > 10.0f)
+            if (Mathf.Abs(transform.position.x) > 10.0f || Mathf.Abs(transform.position.y) > 10.0f)
             {
                 PrefabPool.Instance.ReturnObject(this);
                 return;

@@ -15,19 +15,19 @@ namespace ThirdPartyNinjas
             GetWindow<CatmullRomSpline2DEditor>("Catmull-Rom Spline 2D Editor");
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             SceneView.onSceneGUIDelegate += this.OnSceneGUI;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             SceneView.onSceneGUIDelegate -= this.OnSceneGUI;
         }
 
-        void OnGUI()
+        private void OnGUI()
         {
-            if(crs != lastCrs)
+            if (crs != lastCrs)
             {
                 lastCrs = crs;
                 HandleSplineChanges();
@@ -90,7 +90,7 @@ namespace ThirdPartyNinjas
             }
         }
 
-        void OnSceneGUI(SceneView sceneView)
+        private void OnSceneGUI(SceneView sceneView)
         {
             if (crs != lastCrs)
             {
@@ -156,7 +156,7 @@ namespace ThirdPartyNinjas
             }
         }
 
-        void HandleSplineChanges()
+        private void HandleSplineChanges()
         {
             crs.CalculateDistances();
             CalculateSubsegments();
@@ -186,8 +186,8 @@ namespace ThirdPartyNinjas
             }
         }
 
-        CatmullRomSpline2D crs;
-        CatmullRomSpline2D lastCrs;
-        List<Vector2> subsegments = new List<Vector2>();
+        private CatmullRomSpline2D crs;
+        private CatmullRomSpline2D lastCrs;
+        private List<Vector2> subsegments = new List<Vector2>();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ThirdPartyNinjas
@@ -9,16 +8,16 @@ namespace ThirdPartyNinjas
         public GameObject shipPrefab;
         public float spawnDelay = 0.5f;
 
-        void Start()
+        private void Start()
         {
             StartCoroutine(SpawnerCoroutine());
         }
 
-        void Update()
+        private void Update()
         {
         }
 
-        IEnumerator SpawnerCoroutine()
+        private IEnumerator SpawnerCoroutine()
         {
             while (true)
             {
